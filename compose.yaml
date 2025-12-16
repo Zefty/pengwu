@@ -1,4 +1,4 @@
-name: pengi-start
+name: pengwu
 services:
   db:
     image: postgres

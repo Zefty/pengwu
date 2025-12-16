@@ -9,7 +9,7 @@ done
 echo "Project Name: $name";
 echo "Renaming project..."
 
-original_name="pengi-start"
+original_name="pengwu"
 for filename in $(git ls-files) 
 do
     sed -i "s/$original_name/$name/g" $filename
