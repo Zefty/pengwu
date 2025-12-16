@@ -1,8 +1,8 @@
 import { QueryClient } from "@tanstack/react-query";
 import { createRouter, Link } from "@tanstack/react-router";
 import { setupRouterSsrQueryIntegration } from "@tanstack/react-router-ssr-query";
+import { Button } from "@/client/components/ui/button";
 import type { BetterAuthSession } from "@/server/auth";
-
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
 
@@ -34,16 +34,10 @@ export const getRouter = async () => {
 				<main className="flex flex-col items-center pt-[calc(100%/6)]">
 					<h1 className="text-3xl font-bold bg-red-500/25 rounded-md p-2 mb-12">{`${props.error.cause} ${props.error.message}`}</h1>
 					<div className="flex gap-6">
-						<button
-							type="button"
-							onClick={() => props.reset()}
-							className="border rounded-md p-2 w-24"
-						>
+						<Button type="button" onClick={() => props.reset()}>
 							Reload
-						</button>
-						<Link to="/" className="border rounded-md p-2 w-24 text-center">
-							Go Home
-						</Link>
+						</Button>
+						<Button render={<Link to="/">Go Home</Link>}></Button>
 					</div>
 				</main>
 			);

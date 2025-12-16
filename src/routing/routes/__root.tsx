@@ -7,9 +7,9 @@ import {
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import Header from "@/client/components/Header";
+import appCss from "@/client/lib/styles.css?url";
 import { getAuthSession } from "@/core/lib/getAuthSession";
 import type { RouterContext } from "../router";
-import appCss from "./styles.css?url";
 
 export const Route = createRootRouteWithContext<RouterContext>()({
 	beforeLoad: async ({ context }) => {
