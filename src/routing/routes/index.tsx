@@ -1,52 +1,86 @@
+import {
+	IconBrandGithubFilled,
+	IconBrandLinkedinFilled,
+	IconMailFilled,
+} from "@tabler/icons-react";
 import { createFileRoute } from "@tanstack/react-router";
+import { ALink } from "@/client/components/ALink";
+import { DownloadResume } from "@/client/components/DownloadResume";
+import { PenguinFootprint } from "@/client/components/icons/PenguinFootprint";
+import { ProjectsShowcase } from "@/client/components/ProjectsShowcase";
+import Timeline from "@/client/components/Timeline";
 
 export const Route = createFileRoute("/")({ component: App });
 
 function App() {
 	return (
-		<div className="min-h-screen bg-linear-to-b from-slate-900 via-slate-800 to-slate-900">
-			<section className="relative py-20 px-6 text-center overflow-hidden">
-				<div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10"></div>
-				<div className="relative max-w-5xl mx-auto">
-					<div className="flex items-center justify-center gap-6 mb-6">
-						<img
-							src="/tanstack-circle-logo.png"
-							alt="TanStack Logo"
-							className="w-24 h-24 md:w-32 md:h-32"
-						/>
-						<h1 className="text-6xl md:text-7xl font-black text-white [letter-spacing:-0.08em]">
-							<span className="text-gray-300">TANSTACK</span>{" "}
-							<span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-								START
-							</span>
-						</h1>
-					</div>
-					<p className="text-2xl md:text-3xl text-gray-300 mb-4 font-light">
-						The framework for next generation AI applications
-					</p>
-					<p className="text-lg text-gray-400 max-w-3xl mx-auto mb-8">
-						Full-stack framework powered by TanStack Router for React and Solid.
-						Build modern applications with server functions, streaming, and type
-						safety.
-					</p>
-					<div className="flex flex-col items-center gap-4">
-						<a
-							href="https://tanstack.com/start"
-							target="_blank"
-							rel="noopener noreferrer"
-							className="px-8 py-3 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold rounded-lg transition-colors shadow-lg shadow-cyan-500/50"
-						>
-							Documentation
-						</a>
-						<p className="text-gray-400 text-sm mt-2">
-							Begin your TanStack Start journey by editing{" "}
-							<code className="px-2 py-1 bg-slate-700 rounded text-cyan-400">
-								/src/routes/index.tsx
-							</code>
-						</p>
-					</div>
-				</div>
-			</section>
-		</div>
+		<main>
+			<HomeSection />
+			<ProjectsSection />
+			<ExperienceSection />
+		</main>
+	);
+}
+
+function HomeSection() {
+	return (
+		<section id="home" className="h-screen">
+			<div className="px-64 pt-48 pb-36">
+				<h1 className="text-5xl font-bold leading-[1.2]">
+					Hi, I'm Jaime Wu. <br /> A Fullstack Software Engineer.
+				</h1>
+				<p className="mt-8 text-xl">
+					Waddling through code, one line at a time, in the world of Typescript
+					& .NET.
+				</p>
+			</div>
+			<div className="flex px-64 text-accent gap-16 items-center">
+				<ALink href="https://github.com/Zefty" target="_blank">
+					<IconBrandGithubFilled className="size-12" />
+					Github
+				</ALink>
+				<ALink href="https://www.linkedin.com/in/jwu153/" target="_blank">
+					<IconBrandLinkedinFilled className="size-12" />
+					LinkedIn
+				</ALink>
+				<ALink href="mailto:jaime.wu011@gmail.com" target="_blank">
+					<IconMailFilled className="size-12" />
+					Email
+				</ALink>
+				<ALink
+					href="#projects"
+					className="w-60 h-16 text-xl rounded-full flex gap-2 items-center justify-center bg-primary text-primary-foreground flex-row"
+				>
+					Waddle this way <PenguinFootprint className="size-12" />
+				</ALink>
+			</div>
+		</section>
+	);
+}
+
+function ProjectsSection() {
+	return (
+		<section
+			id="projects"
+			className="h-screen flex flex-col py-24 px-64 w-full gap-12"
+		>
+			<h1 className="text-5xl font-bold">Projects</h1>
+			<ProjectsShowcase />
+		</section>
+	);
+}
+
+function ExperienceSection() {
+	return (
+		<section
+			id="experience"
+			className="flex flex-col px-64 py-24 justify-center"
+		>
+			<div className="flex flex-col gap-8">
+				<h1 className="text-5xl font-bold">Experience</h1>
+				<DownloadResume />
+			</div>
+			<Timeline />
+		</section>
 	);
 }

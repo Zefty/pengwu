@@ -6,10 +6,10 @@ import {
 	Scripts,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
-import Header from "@/client/components/Header";
+import { AppWrapper } from "@/client/components/AppWrapper";
+import appCss from "@/client/styles.css?url";
 import { getAuthSession } from "@/core/lib/getAuthSession";
 import type { RouterContext } from "../router";
-import appCss from "./styles.css?url";
 
 export const Route = createRootRouteWithContext<RouterContext>()({
 	beforeLoad: async ({ context }) => {
@@ -40,13 +40,12 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 
 function RootDocument({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang="en">
+		<html lang="en" className="dark">
 			<head>
 				<HeadContent />
 			</head>
 			<body>
-				<Header />
-				{children}
+				<AppWrapper>{children}</AppWrapper>
 				<TanStackDevtools
 					config={{
 						position: "bottom-right",

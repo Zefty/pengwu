@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CircleCheck, CircleX } from "lucide-react";
+import { Button } from "@/client/components/ui/button";
+import { Input } from "@/client/components/ui/input";
 import { useAuthHandlers } from "@/client/hooks/useAuthHandlers";
 import { cn } from "@/client/lib/utils";
 
@@ -42,45 +44,45 @@ function RouteComponent() {
 				)}
 				{!routeContext.session && (
 					<>
-						<input
+						<Input
 							name="email"
 							type="text"
 							placeholder="Email"
 							className="border rounded-md p-2"
 						/>
-						<input
+						<Input
 							name="password"
 							type="password"
 							placeholder="Password"
 							className="border rounded-md p-2"
 						/>
-						<button
+						<Button
 							type="submit"
-							className="border rounded-md p-2 self-start w-24 disabled:text-gray-400"
+							className="disabled:text-gray-400"
 							disabled={isPending}
 							formAction={signInAction}
 						>
 							Sign In
-						</button>
-						<button
+						</Button>
+						<Button
 							type="submit"
-							className="border rounded-md p-2 self-start w-24 disabled:text-gray-400"
+							className="disabled:text-gray-400"
 							disabled={isPending}
 							formAction={signUpAction}
 						>
 							Sign Up
-						</button>
+						</Button>
 					</>
 				)}
 				{routeContext.session && (
-					<button
+					<Button
 						type="submit"
-						className="border rounded-md p-2 self-end w-24 disabled:text-gray-400"
+						className="disabled:text-gray-400"
 						disabled={isSignOutPending}
 						formAction={signOutAction}
 					>
 						Sign Out
-					</button>
+					</Button>
 				)}
 			</form>
 		</div>
