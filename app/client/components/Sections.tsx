@@ -14,16 +14,16 @@ import Timeline from "./Timeline";
 export function HomeSection() {
 	return (
 		<section id="home" className="h-screen">
-			<div className="px-64 pt-48 pb-36">
+			<div className="px-16 xl:px-64 pt-48 pb-36">
 				<h1 className="text-5xl font-bold leading-[1.2]">
 					Hi, I&apos;m Jaime Wu. <br /> A Fullstack Software Engineer.
 				</h1>
-				<p className="mt-8 text-xl">
+				<p className="mt-8 text-xl font-semibold">
 					Waddling through code, one line at a time, in the world of Typescript
 					& .NET.
 				</p>
 			</div>
-			<div className="flex px-64 text-accent gap-16 items-center">
+			<div className="flex px-16 xl:px-64 text-accent gap-16 items-center font-semibold">
 				<ALink href="https://github.com/Zefty" target="_blank">
 					<IconBrandGithubFilled className="size-12" />
 					Github
@@ -51,7 +51,7 @@ export function ProjectsSection() {
 	return (
 		<section
 			id="projects"
-			className="h-screen flex flex-col pt-12 pb-24 px-64 w-full gap-12"
+			className="h-screen flex flex-col pt-12 pb-24 px-16 xl:px-64 w-full gap-12"
 		>
 			<h1 className="text-5xl font-bold">Projects</h1>
 			<ProjectsShowcase />
@@ -63,7 +63,7 @@ export function ExperienceSection() {
 	return (
 		<section
 			id="experience"
-			className="flex flex-col px-64 pt-12 pb-24 justify-center"
+			className="flex flex-col px-16 xl:px-64 pt-12 pb-24 justify-center"
 		>
 			<div className="flex flex-col gap-8">
 				<h1 className="text-5xl font-bold">Experience</h1>

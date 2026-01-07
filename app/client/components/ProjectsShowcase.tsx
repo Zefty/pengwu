@@ -1,5 +1,6 @@
 import AutoScroll from "embla-carousel-auto-scroll";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { cn } from "../lib/utils";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
@@ -34,7 +35,7 @@ const projects = [
 	{
 		title: "pengwu",
 		description: "My personal portfolio website, the one you're looking at!",
-		technologies: ["Tanstack Start", "Three.js", "Shadcn", "TailwindCss"],
+		technologies: ["Next.js", "Three.js", "Shadcn", "TailwindCss"],
 		link: "https://pengwu.vercel.app/",
 		source: "https://github.com/Zefty/pengwu",
 		img: "/pengwu.png",
@@ -100,7 +101,7 @@ export function ProjectsShowcase() {
 									/>
 									<div className="flex flex-col p-6 gap-4 h-full">
 										<h1 className="text-2xl font-bold">{project.title}</h1>
-										<p>{project.description}</p>
+										<p className="font-semibold">{project.description}</p>
 										<div className="mt-auto flex flex-wrap gap-2">
 											{project.technologies.map((tech) => (
 												<Badge
@@ -119,46 +120,77 @@ export function ProjectsShowcase() {
 					</CarouselItem>
 				))}
 			</CarouselContent>
+			<CarouselControls />
+		</Carousel>
+	);
+}
+
+function CarouselControls() {
+	const { api } = useCarousel();
+	const [autoscroll, setAutoscroll] = useState(false);
+	const autoScroll = api?.plugins()?.autoScroll;
+
+	useEffect(() => {
+		if (!autoScroll) return;
+		setAutoscroll(autoScroll.isPlaying());
+	}, [autoScroll]);
+
+	if (!autoScroll) return;
+
+	const autoscrollHandler = () => {
+		if (autoScroll.isPlaying()) {
+			autoScroll.stop();
+			setAutoscroll(false);
+		} else {
+			autoScroll.play();
+			setAutoscroll(true);
+		}
+	};
+	return (
+		<>
 			<CarouselPrevious
+				disabled={autoscroll}
 				overrideDefaultPosition
 				size="icon-lg"
 				className="translate-y-1/2"
 			/>
 			<CarouselNext
+				disabled={autoscroll}
 				overrideDefaultPosition
 				size="icon-lg"
 				className="translate-x-[125%] translate-y-1/2"
 			/>
 			<CarouselAutoscroll
 				size="lg"
-				className="translate-x-[125%] translate-y-1/2"
+				className="translate-x-[175%] translate-y-1/2"
+				autoscroll={autoscroll}
+				setAutoscroll={autoscrollHandler}
 			/>
-		</Carousel>
+		</>
 	);
 }
 
 function CarouselAutoscroll({
 	className,
+	autoscroll,
+	setAutoscroll,
 	variant = "outline",
 	size = "default",
 	...props
-}: React.ComponentProps<typeof Button>) {
-	const { api } = useCarousel();
-	const autoScroll = api?.plugins()?.autoScroll;
-	if (!autoScroll) return;
-
+}: React.ComponentProps<typeof Button> & {
+	autoscroll: boolean;
+	setAutoscroll: () => void;
+}) {
 	return (
 		<Button
 			data-slot="carousel-autoscroll"
 			variant={variant}
 			size={size}
-			className={cn("rounded-full absolute touch-manipulation", className)}
-			onClick={() =>
-				autoScroll.isPlaying() ? autoScroll.stop() : autoScroll.play()
-			}
+			className={cn("w-20 rounded-full absolute touch-manipulation", className)}
+			onClick={setAutoscroll}
 			{...props}
 		>
-			Autoscroll
+			{autoscroll ? "Stop" : "Start"}
 			<span className="sr-only">Autoscroll</span>
 		</Button>
 	);

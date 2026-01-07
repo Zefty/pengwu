@@ -1,4 +1,8 @@
-import { IconBuilding, IconCalendar } from "@tabler/icons-react";
+import {
+	IconBuilding,
+	IconCalendar,
+	IconChevronDown,
+} from "@tabler/icons-react";
 import { Badge } from "./ui/badge";
 import {
 	Collapsible,
@@ -108,14 +112,17 @@ function TimelineContent({
 }) {
 	return (
 		<Collapsible className="hover:bg-muted/50 data-open:bg-muted/50 rounded-lg p-4 w-full">
-			<CollapsibleTrigger className="text-start w-full">
-				<h3 className="text-3xl font-semibold tracking-[-0.01em] text-start">
-					{title}
-				</h3>
-				<div className="flex items-center gap-2 mt-2 text-md">
-					<IconCalendar className="h-4 w-4" />
-					<span>{date}</span>
+			<CollapsibleTrigger className="group flex justify-between text-start w-full">
+				<div>
+					<h3 className="text-3xl font-semibold tracking-[-0.01em] text-start">
+						{title}
+					</h3>
+					<div className="flex items-center gap-2 mt-2 text-md font-semibold">
+						<IconCalendar className="h-4 w-4" />
+						<span>{date}</span>
+					</div>
 				</div>
+				<IconChevronDown className="self-start stroke-3 group-data-panel-open:rotate-180 transition-transform duration-350 ease-out" />
 			</CollapsibleTrigger>
 			<CollapsibleContent className="font-normal pt-6 text-lg text-primary/95 text-pretty whitespace-pre-line">
 				{description}
