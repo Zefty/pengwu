@@ -29,6 +29,7 @@ export const getRouter = async () => {
 		context: { queryClient },
 		defaultPreload: "intent",
 		scrollRestoration: true,
+		defaultHashScrollIntoView: { behavior: "smooth" },
 		defaultErrorComponent: (props) => {
 			return (
 				<main className="flex flex-col items-center pt-[calc(100%/6)]">
