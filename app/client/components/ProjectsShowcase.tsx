@@ -1,7 +1,9 @@
+import { IconExternalLink } from "@tabler/icons-react";
 import AutoScroll from "embla-carousel-auto-scroll";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { cn } from "../lib/utils";
+import { ALink } from "./ALink";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
@@ -100,7 +102,16 @@ export function ProjectsShowcase() {
 										className="bg-muted/50 aspect-video w-full object-cover object-left dark:brightness-[0.85]"
 									/>
 									<div className="flex flex-col p-6 gap-4 h-full">
-										<h1 className="text-2xl font-bold">{project.title}</h1>
+										<div className="flex gap-1">
+											<ALink
+												className="flex-row gap-1 text-2xl font-bold"
+												href={project.link}
+												target="_blank"
+											>
+												{project.title}
+												<IconExternalLink className="self-start size-4" />
+											</ALink>
+										</div>
 										<p className="font-semibold">{project.description}</p>
 										<div className="mt-auto flex flex-wrap gap-2">
 											{project.technologies.map((tech) => (
