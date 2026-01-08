@@ -107,7 +107,7 @@ export function ProjectsShowcase() {
 												<Badge
 													key={tech}
 													variant="secondary"
-													className="rounded-full text-sm p-3"
+													className="rounded-full md:text-sm p-3"
 												>
 													{tech}
 												</Badge>

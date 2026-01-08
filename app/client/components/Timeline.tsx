@@ -58,7 +58,7 @@ const experiences = [
 
 export default function Timeline() {
 	return (
-		<div className="w-4xl mx-auto py-12 md:py-20 px-6">
+		<div className="md:w-2xl lg:w-4xl mx-auto py-12 md:py-20 px-6">
 			<div className="relative ml-3">
 				{/* Timeline line */}
 				<div className="absolute left-0 top-4 bottom-0 border-l-2 border-primary" />
@@ -86,7 +86,7 @@ export default function Timeline() {
 										<Badge
 											key={tech}
 											variant="secondary"
-											className="rounded-full text-sm p-3"
+											className="rounded-full md:text-sm p-3"
 										>
 											{tech}
 										</Badge>
@@ -112,9 +112,9 @@ function TimelineContent({
 }) {
 	return (
 		<Collapsible className="hover:bg-muted/50 data-open:bg-muted/50 rounded-lg p-4 w-full">
-			<CollapsibleTrigger className="group flex justify-between text-start w-full">
+			<CollapsibleTrigger className="group flex justify-between text-start w-full gap-4">
 				<div>
-					<h3 className="text-3xl font-semibold tracking-[-0.01em] text-start">
+					<h3 className="text-xl md:text-2xl lg:text-3xl font-semibold tracking-[-0.01em] text-start">
 						{title}
 					</h3>
 					<div className="flex items-center gap-2 mt-2 text-md font-semibold">
@@ -124,7 +124,7 @@ function TimelineContent({
 				</div>
 				<IconChevronDown className="self-start stroke-3 group-data-panel-open:rotate-180 transition-transform duration-350 ease-out" />
 			</CollapsibleTrigger>
-			<CollapsibleContent className="font-normal pt-6 text-lg text-primary/95 text-pretty whitespace-pre-line">
+			<CollapsibleContent className="font-normal pt-6 text-sm md:text-lg text-primary/95 text-pretty whitespace-pre-line">
 				{description}
 			</CollapsibleContent>
 		</Collapsible>

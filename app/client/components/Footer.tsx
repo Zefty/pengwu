@@ -7,7 +7,7 @@ import { ALink } from "./ALink";
 
 export function Footer() {
 	return (
-		<footer className="h-70 flex flex-wrap justify-between px-16 xl:px-64 py-12 ">
+		<footer className="h-70 flex flex-wrap justify-between px-16 2xl:px-64 py-12 ">
 			<div className="flex flex-col h-full justify-between">
 				<span className="font-semibold text-xl underline decoration-2 underline-offset-6">
 					{`© ${new Date().getFullYear()}, Built by Jaime Wu.`}

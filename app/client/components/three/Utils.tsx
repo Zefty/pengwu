@@ -1,4 +1,4 @@
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 
@@ -93,6 +93,32 @@ export function BobblingObject({
 
 	return (
 		<group ref={ref} position={position}>
+			{children}
+		</group>
+	);
+}
+
+export function ResponsiveContainer({
+	children,
+}: {
+	children?: React.ReactNode;
+}) {
+	const { size } = useThree();
+	let scale = 0.65;
+	let position = [0, -0.25, 0] as [number, number, number];
+
+	if (size.width >= 1920) {
+		scale = 1;
+		position = [5, 0, 0];
+	} else if (size.width >= 1280) {
+		scale = 0.85;
+		position = [4, 0, 0];
+	} else if (size.width >= 1024) {
+		scale = 0.75;
+		position = [3, 0, 0];
+	}
+	return (
+		<group scale={scale} position={position}>
 			{children}
 		</group>
 	);
