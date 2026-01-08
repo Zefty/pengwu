@@ -27,15 +27,27 @@ export function HomeSection() {
 				</p>
 			</div>
 			<div className="flex px-16 2xl:px-64 text-accent gap-8 flex-wrap lg:gap-16 items-center font-semibold pb-16">
-				<ALink href="https://github.com/Zefty" target="_blank">
+				<ALink
+					href="https://github.com/Zefty"
+					target="_blank"
+					className="transition-colors duration-350 ease-out hover:text-muted"
+				>
 					<IconBrandGithubFilled className="lg:size-12" />
 					Github
 				</ALink>
-				<ALink href="https://www.linkedin.com/in/jwu153/" target="_blank">
+				<ALink
+					href="https://www.linkedin.com/in/jwu153/"
+					target="_blank"
+					className="transition-colors duration-350 ease-out hover:text-muted"
+				>
 					<IconBrandLinkedinFilled className="lg:size-12" />
 					LinkedIn
 				</ALink>
-				<ALink href="mailto:jaime.wu011@gmail.com" target="_blank">
+				<ALink
+					href="mailto:jaime.wu011@gmail.com"
+					target="_blank"
+					className="transition-colors duration-350 ease-out hover:text-muted"
+				>
 					<IconMailFilled className="lg:size-12" />
 					Email
 				</ALink>

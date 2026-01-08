@@ -3,6 +3,7 @@ import {
 	IconCalendar,
 	IconChevronDown,
 } from "@tabler/icons-react";
+import { motion, Variants } from "motion/react";
 import { Badge } from "./ui/badge";
 import {
 	Collapsible,
@@ -48,7 +49,7 @@ const experiences = [
 	{
 		title: "Data Engineer",
 		company: "Quantiful",
-		period: "2018 - 2021",
+		period: "2021 - 2022",
 		description: `Quantiful is a SaaS company specialising in AI-powered demand planning software. In my role, I focused on:
 		- Developing data engineering and machine learning pipelines across multiple projects.
 		- Saving data scientists 8+ hours per week on manual processes and triggers.`,
@@ -56,46 +57,70 @@ const experiences = [
 	},
 ];
 
+const itemVariants = {
+	hidden: { opacity: 0, y: 24 },
+	visible: {
+		opacity: 1,
+		y: 0,
+		transition: {
+			duration: 0.5,
+			ease: "easeOut",
+		},
+	},
+} as Variants;
+
 export default function Timeline() {
 	return (
 		<div className="md:w-2xl lg:w-4xl mx-auto py-12 md:py-20 px-6">
 			<div className="relative ml-3">
 				{/* Timeline line */}
 				<div className="absolute left-0 top-4 bottom-0 border-l-2 border-primary" />
-				{experiences.map(
-					({ company, description, period, technologies, title }) => (
-						<div key={company} className="relative pl-8 pb-12 last:pb-0">
-							{/* Timeline dot */}
-							<div className="absolute size-4 -translate-x-1/2 left-px top-3 rounded-full bg-primary" />
+				<motion.div
+					initial="hidden"
+					whileInView="visible"
+					transition={{ staggerChildren: 0.5 }}
+				>
+					{experiences.map(
+						({ company, description, period, technologies, title }) => (
+							<motion.div
+								key={company}
+								variants={itemVariants}
+								initial="hidden"
+								whileInView="visible"
+								className="relative pl-8 pb-12 last:pb-0"
+							>
+								{/* Timeline dot */}
+								<div className="absolute size-4 -translate-x-1/2 left-px top-3 rounded-full bg-primary" />
 
-							{/* Content */}
-							<div className="space-y-3">
-								<div className="flex items-center gap-2.5">
-									<div className="shrink-0 h-9 w-9 bg-accent rounded-full flex items-center justify-center">
-										<IconBuilding className="h-5 w-5 text-muted-foreground" />
+								{/* Content */}
+								<div className="space-y-3">
+									<div className="flex items-center gap-2.5">
+										<div className="shrink-0 h-9 w-9 bg-accent rounded-full flex items-center justify-center">
+											<IconBuilding className="h-5 w-5 text-muted-foreground" />
+										</div>
+										<span className="text-xl font-medium">{company}</span>
 									</div>
-									<span className="text-xl font-medium">{company}</span>
+									<TimelineContent
+										title={title}
+										date={period}
+										description={description}
+									/>
+									<div className="flex flex-wrap gap-2">
+										{technologies.map((tech) => (
+											<Badge
+												key={tech}
+												variant="secondary"
+												className="rounded-full md:text-sm p-3"
+											>
+												{tech}
+											</Badge>
+										))}
+									</div>
 								</div>
-								<TimelineContent
-									title={title}
-									date={period}
-									description={description}
-								/>
-								<div className="flex flex-wrap gap-2">
-									{technologies.map((tech) => (
-										<Badge
-											key={tech}
-											variant="secondary"
-											className="rounded-full md:text-sm p-3"
-										>
-											{tech}
-										</Badge>
-									))}
-								</div>
-							</div>
-						</div>
-					),
-				)}
+							</motion.div>
+						),
+					)}
+				</motion.div>
 			</div>
 		</div>
 	);
