@@ -7,8 +7,8 @@ import {
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { AppWrapper } from "@/client/components/AppWrapper";
-import appCss from "@/client/styles.css?url";
-import type { RouterContext } from "../router";
+import type { RouterContext } from "@/router";
+import appCss from "@/router/routes/styles.css?url";
 
 export const Route = createRootRouteWithContext<RouterContext>()({
 	head: () => ({

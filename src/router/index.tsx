@@ -2,9 +2,8 @@ import { QueryClient } from "@tanstack/react-query";
 import { createRouter, Link } from "@tanstack/react-router";
 import { setupRouterSsrQueryIntegration } from "@tanstack/react-router-ssr-query";
 import { Button } from "@/client/components/ui/button";
+import { routeTree } from "@/router/routeTree.gen";
 import type { BetterAuthSession } from "@/server/auth";
-// Import the generated route tree
-import { routeTree } from "./routeTree.gen";
 
 export interface RouterContext {
 	queryClient: QueryClient;
