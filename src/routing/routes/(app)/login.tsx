@@ -1,5 +1,5 @@
+import { IconCircleCheck, IconCircleX } from "@tabler/icons-react";
 import { createFileRoute } from "@tanstack/react-router";
-import { CircleCheck, CircleX } from "lucide-react";
 import { Button } from "@/client/components/ui/button";
 import { Input } from "@/client/components/ui/input";
 import { useAuthHandlers } from "@/client/hooks/useAuthHandlers";
@@ -38,7 +38,7 @@ function RouteComponent() {
 							alert.type === "success" ? "bg-green-500/25" : "bg-red-500/25",
 						)}
 					>
-						{alert.type === "success" ? <CircleCheck /> : <CircleX />}
+						{alert.type === "success" ? <IconCircleCheck /> : <IconCircleX />}
 						{alert.message}
 					</div>
 				)}

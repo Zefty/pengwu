@@ -2,7 +2,12 @@ import { Environment, useGLTF } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import type * as THREE from "three";
-import { BobblingObject, MouseRotatingObject, ParallaxGroup } from "./Utils";
+import {
+	BobblingObject,
+	MouseRotatingObject,
+	ParallaxGroup,
+	ResponsiveContainer,
+} from "./Utils";
 
 export function PengwuCanvas({
 	containerRef,
@@ -21,19 +26,16 @@ export function PengwuCanvas({
 			>
 				<Suspense fallback={null}>
 					<Environment preset="sunset" />
-					<ParallaxGroup ref={containerRef}>
-						<BobblingObject
-							amplitude={0.1}
-							frequency={0.2}
-							phase={0}
-							position={[5, 0, 0]}
-						>
-							<IceBerg
-								baseRotation={[0, (45 * Math.PI) / 180, (15 * Math.PI) / 180]}
-							/>
-							<PudgyPenguin position={[0.5, 2.5, 0.5]} />
-						</BobblingObject>
-					</ParallaxGroup>
+					<ResponsiveContainer>
+						<ParallaxGroup ref={containerRef}>
+							<BobblingObject amplitude={0.1} frequency={0.2} phase={0}>
+								<IceBerg
+									baseRotation={[0, (45 * Math.PI) / 180, (15 * Math.PI) / 180]}
+								/>
+								<PudgyPenguin position={[0.5, 2.5, 0.5]} />
+							</BobblingObject>
+						</ParallaxGroup>
+					</ResponsiveContainer>
 				</Suspense>
 			</Canvas>
 		</main>
