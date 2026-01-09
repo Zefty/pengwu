@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { createTodo } from "@/server/functions/createTodos";
 import { getTodos } from "@/server/functions/getTodos";
 
-export const Route = createFileRoute("/(app)/_authed/todos")({
+export const Route = createFileRoute("/_app/_protected/todos")({
 	component: DemoDrizzle,
 	loader: async ({ context }) => {
 		await context.queryClient.ensureQueryData({

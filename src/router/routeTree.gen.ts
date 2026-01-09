@@ -9,13 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AppRouteRouteImport } from './routes/_app/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiTodosRouteImport } from './routes/api/todos'
-import { Route as appLoginRouteImport } from './routes/(app)/login'
-import { Route as appAuthedRouteRouteImport } from './routes/(app)/_authed/route'
+import { Route as AppLoginRouteImport } from './routes/_app/login'
+import { Route as AppProtectedRouteRouteImport } from './routes/_app/_protected/route'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth.$'
-import { Route as appAuthedTodosRouteImport } from './routes/(app)/_authed/todos'
+import { Route as AppProtectedTodosRouteImport } from './routes/_app/_protected/todos'
 
+const AppRouteRoute = AppRouteRouteImport.update({
+  id: '/_app',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -26,47 +31,48 @@ const ApiTodosRoute = ApiTodosRouteImport.update({
   path: '/api/todos',
   getParentRoute: () => rootRouteImport,
 } as any)
-const appLoginRoute = appLoginRouteImport.update({
-  id: '/(app)/login',
+const AppLoginRoute = AppLoginRouteImport.update({
+  id: '/login',
   path: '/login',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AppRouteRoute,
 } as any)
-const appAuthedRouteRoute = appAuthedRouteRouteImport.update({
-  id: '/(app)/_authed',
-  getParentRoute: () => rootRouteImport,
+const AppProtectedRouteRoute = AppProtectedRouteRouteImport.update({
+  id: '/_protected',
+  getParentRoute: () => AppRouteRoute,
 } as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
   getParentRoute: () => rootRouteImport,
 } as any)
-const appAuthedTodosRoute = appAuthedTodosRouteImport.update({
+const AppProtectedTodosRoute = AppProtectedTodosRouteImport.update({
   id: '/todos',
   path: '/todos',
-  getParentRoute: () => appAuthedRouteRoute,
+  getParentRoute: () => AppProtectedRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/login': typeof appLoginRoute
+  '/login': typeof AppLoginRoute
   '/api/todos': typeof ApiTodosRoute
-  '/todos': typeof appAuthedTodosRoute
+  '/todos': typeof AppProtectedTodosRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/login': typeof appLoginRoute
+  '/login': typeof AppLoginRoute
   '/api/todos': typeof ApiTodosRoute
-  '/todos': typeof appAuthedTodosRoute
+  '/todos': typeof AppProtectedTodosRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/(app)/_authed': typeof appAuthedRouteRouteWithChildren
-  '/(app)/login': typeof appLoginRoute
+  '/_app': typeof AppRouteRouteWithChildren
+  '/_app/_protected': typeof AppProtectedRouteRouteWithChildren
+  '/_app/login': typeof AppLoginRoute
   '/api/todos': typeof ApiTodosRoute
-  '/(app)/_authed/todos': typeof appAuthedTodosRoute
+  '/_app/_protected/todos': typeof AppProtectedTodosRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRouteTypes {
@@ -77,23 +83,30 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/(app)/_authed'
-    | '/(app)/login'
+    | '/_app'
+    | '/_app/_protected'
+    | '/_app/login'
     | '/api/todos'
-    | '/(app)/_authed/todos'
+    | '/_app/_protected/todos'
     | '/api/auth/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  appAuthedRouteRoute: typeof appAuthedRouteRouteWithChildren
-  appLoginRoute: typeof appLoginRoute
+  AppRouteRoute: typeof AppRouteRouteWithChildren
   ApiTodosRoute: typeof ApiTodosRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/_app': {
+      id: '/_app'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AppRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -108,19 +121,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiTodosRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/(app)/login': {
-      id: '/(app)/login'
+    '/_app/login': {
+      id: '/_app/login'
       path: '/login'
       fullPath: '/login'
-      preLoaderRoute: typeof appLoginRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AppLoginRouteImport
+      parentRoute: typeof AppRouteRoute
     }
-    '/(app)/_authed': {
-      id: '/(app)/_authed'
+    '/_app/_protected': {
+      id: '/_app/_protected'
       path: ''
       fullPath: ''
-      preLoaderRoute: typeof appAuthedRouteRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AppProtectedRouteRouteImport
+      parentRoute: typeof AppRouteRoute
     }
     '/api/auth/$': {
       id: '/api/auth/$'
@@ -129,32 +142,44 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAuthSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/(app)/_authed/todos': {
-      id: '/(app)/_authed/todos'
+    '/_app/_protected/todos': {
+      id: '/_app/_protected/todos'
       path: '/todos'
       fullPath: '/todos'
-      preLoaderRoute: typeof appAuthedTodosRouteImport
-      parentRoute: typeof appAuthedRouteRoute
+      preLoaderRoute: typeof AppProtectedTodosRouteImport
+      parentRoute: typeof AppProtectedRouteRoute
     }
   }
 }
 
-interface appAuthedRouteRouteChildren {
-  appAuthedTodosRoute: typeof appAuthedTodosRoute
+interface AppProtectedRouteRouteChildren {
+  AppProtectedTodosRoute: typeof AppProtectedTodosRoute
 }
 
-const appAuthedRouteRouteChildren: appAuthedRouteRouteChildren = {
-  appAuthedTodosRoute: appAuthedTodosRoute,
+const AppProtectedRouteRouteChildren: AppProtectedRouteRouteChildren = {
+  AppProtectedTodosRoute: AppProtectedTodosRoute,
 }
 
-const appAuthedRouteRouteWithChildren = appAuthedRouteRoute._addFileChildren(
-  appAuthedRouteRouteChildren,
+const AppProtectedRouteRouteWithChildren =
+  AppProtectedRouteRoute._addFileChildren(AppProtectedRouteRouteChildren)
+
+interface AppRouteRouteChildren {
+  AppProtectedRouteRoute: typeof AppProtectedRouteRouteWithChildren
+  AppLoginRoute: typeof AppLoginRoute
+}
+
+const AppRouteRouteChildren: AppRouteRouteChildren = {
+  AppProtectedRouteRoute: AppProtectedRouteRouteWithChildren,
+  AppLoginRoute: AppLoginRoute,
+}
+
+const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
+  AppRouteRouteChildren,
 )
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  appAuthedRouteRoute: appAuthedRouteRouteWithChildren,
-  appLoginRoute: appLoginRoute,
+  AppRouteRoute: AppRouteRouteWithChildren,
   ApiTodosRoute: ApiTodosRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
 }
@@ -162,7 +187,7 @@ export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
 
-import type { getRouter } from './router.tsx'
+import type { getRouter } from './index.tsx'
 import type { createStart } from '@tanstack/react-start'
 declare module '@tanstack/react-start' {
   interface Register {
