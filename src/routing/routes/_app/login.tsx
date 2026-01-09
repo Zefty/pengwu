@@ -86,5 +86,5 @@ function RouteComponent() {
 				)}
 			</form>
 		</div>
-	)
+	);
 }

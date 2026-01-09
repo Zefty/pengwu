@@ -9,7 +9,7 @@ export const Route = createFileRoute("/_app/_protected/todos")({
 		await context.queryClient.ensureQueryData({
 			queryKey: ["getTodos"],
 			queryFn: getTodos,
-		})
+		});
 	},
 });
 
@@ -17,7 +17,7 @@ function DemoDrizzle() {
 	const { data, refetch } = useQuery({
 		queryKey: ["getTodos"],
 		queryFn: getTodos,
-	})
+	});
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -33,7 +33,7 @@ function DemoDrizzle() {
 		} catch (error) {
 			console.error("Failed to create todo:", error);
 		}
-	}
+	};
 
 	return (
 		<div
@@ -172,5 +172,5 @@ function DemoDrizzle() {
 				</div>
 			</div>
 		</div>
-	)
+	);
 }
