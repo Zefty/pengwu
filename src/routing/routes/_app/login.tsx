@@ -5,7 +5,7 @@ import { Input } from "@/client/components/ui/input";
 import { useAuthHandlers } from "@/client/hooks/useAuthHandlers";
 import { cn } from "@/client/lib/utils";
 
-export const Route = createFileRoute("/(app)/login")({
+export const Route = createFileRoute("/_app/login")({
 	component: RouteComponent,
 });
 
@@ -86,5 +86,5 @@ function RouteComponent() {
 				)}
 			</form>
 		</div>
-	);
+	)
 }

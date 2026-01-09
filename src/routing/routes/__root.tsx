@@ -8,13 +8,9 @@ import {
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { AppWrapper } from "@/client/components/AppWrapper";
 import appCss from "@/client/styles.css?url";
-import { getAuthSession } from "@/core/lib/getAuthSession";
 import type { RouterContext } from "../router";
 
 export const Route = createRootRouteWithContext<RouterContext>()({
-	beforeLoad: async ({ context }) => {
-		return await getAuthSession(context.queryClient);
-	},
 	head: () => ({
 		meta: [
 			{
@@ -25,13 +21,22 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 				content: "width=device-width, initial-scale=1",
 			},
 			{
-				title: "TanStack Start Starter",
+				title: "pengwu",
+			},
+			{
+				name: "description",
+				content: "Jaime's personal portfolio",
 			},
 		],
 		links: [
 			{
 				rel: "stylesheet",
 				href: appCss,
+			},
+			{
+				rel: "icon",
+				href: "/favicon.ico",
+				sizes: "any",
 			},
 		],
 	}),

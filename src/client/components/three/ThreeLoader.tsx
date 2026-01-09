@@ -22,8 +22,14 @@ export function ThreeLoader({ minDuration = 1000 }: { minDuration?: number }) {
 				hidden ? "opacity-0" : "opacity-100",
 			)}
 		>
-			<Progress value={progress} className="w-1/4 bg-transparent">
-				<h1 className="text-center w-full font-bold text-xl">Loading...</h1>
+			<Progress
+				value={progress}
+				className="w-1/4 bg-transparent"
+				aria-label="loading"
+			>
+				<h1 id="loading-label" className="text-center w-full font-bold text-xl">
+					Loading...
+				</h1>
 			</Progress>
 			<OceanBackground className="-z-10" />
 		</div>

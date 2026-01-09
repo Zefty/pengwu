@@ -17,22 +17,28 @@ export function Footer() {
 						href="https://github.com/Zefty"
 						target="_blank"
 						className="transition-colors duration-350 ease-out hover:text-muted"
+						aria-label="github"
 					>
 						<IconBrandGithubFilled className="size-12" />
+						<span className="sr-only hidden">Github</span>
 					</ALink>
 					<ALink
 						href="https://www.linkedin.com/in/jwu153/"
 						target="_blank"
 						className="transition-colors duration-350 ease-out hover:text-muted"
+						aria-label="linkedin"
 					>
 						<IconBrandLinkedinFilled className="size-12" />
+						<span className="sr-only hidden">Linkedin</span>
 					</ALink>
 					<ALink
 						href="mailto:jaime.wu011@gmail.com"
 						target="_blank"
 						className="transition-colors duration-350 ease-out hover:text-muted"
+						aria-label="email"
 					>
 						<IconMailFilled className="size-12" />
+						<span className="sr-only hidden">Email</span>
 					</ALink>
 				</div>
 			</div>

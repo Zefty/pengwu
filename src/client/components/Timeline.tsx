@@ -139,9 +139,9 @@ function TimelineContent({
 		<Collapsible className="hover:bg-muted/50 data-open:bg-muted/50 rounded-lg p-4 w-full">
 			<CollapsibleTrigger className="group flex justify-between text-start w-full gap-4">
 				<div>
-					<h3 className="text-xl md:text-2xl lg:text-3xl font-semibold tracking-[-0.01em] text-start">
+					<span className="text-xl md:text-2xl lg:text-3xl font-semibold tracking-[-0.01em] text-start">
 						{title}
-					</h3>
+					</span>
 					<div className="flex items-center gap-2 mt-2 text-md font-semibold">
 						<IconCalendar className="h-4 w-4" />
 						<span>{date}</span>
