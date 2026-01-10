@@ -1,10 +1,13 @@
 import { useLocation } from "@tanstack/react-router";
-import { useRef } from "react";
+import { Activity, lazy, Suspense, useRef } from "react";
 import { Footer } from "./Footer";
 import { OceanBackground } from "./OceanBackground";
-import { PengwuCanvas } from "./three/PengwuCanvas";
 import { ThreeLoader } from "./three/ThreeLoader";
 import { ScrollArea } from "./ui/scroll-area";
+
+const PengwuCanvas = lazy(() =>
+	import("./three/PengwuCanvas").then((m) => ({ default: m.PengwuCanvas })),
+);
 
 export function AppWrapper({ children }: { children: React.ReactNode }) {
 	const containerRef = useRef<HTMLDivElement | null>(null);
@@ -16,9 +19,15 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
 	return (
 		<>
 			<OceanBackground className="-z-10" />
-			{isHomePage && <ThreeLoader />}
+			<Activity mode={isHomePage ? "visible" : "hidden"}>
+				<ThreeLoader />
+			</Activity>
 			<ScrollArea className="h-screen w-screen" ref={containerRef}>
-				{isHomePage && <PengwuCanvas containerRef={containerRef} />}
+				<Activity mode={isHomePage ? "visible" : "hidden"}>
+					<Suspense fallback={null}>
+						<PengwuCanvas containerRef={containerRef} />
+					</Suspense>
+				</Activity>
 				{children}
 				<Footer />
 			</ScrollArea>

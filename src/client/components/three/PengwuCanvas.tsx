@@ -1,13 +1,15 @@
-import { Environment, useGLTF } from "@react-three/drei";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Suspense, useRef } from "react";
-import type * as THREE from "three";
-import {
-	BobblingObject,
-	MouseRotatingObject,
-	ParallaxGroup,
-	ResponsiveContainer,
-} from "./Utils";
+import { Environment } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import { lazy, Suspense } from "react";
+import { BobblingObject, ParallaxGroup, ResponsiveContainer } from "./Utils";
+
+const PudgyPenguin = lazy(() =>
+	import("./Assets").then((m) => ({ default: m.PudgyPenguin })),
+);
+
+const IceBerg = lazy(() =>
+	import("./Assets").then((m) => ({ default: m.IceBerg })),
+);
 
 export function PengwuCanvas({
 	containerRef,
@@ -39,50 +41,5 @@ export function PengwuCanvas({
 				</Suspense>
 			</Canvas>
 		</main>
-	);
-}
-
-function PudgyPenguin({
-	position = [0, 0, 0],
-}: {
-	position?: [number, number, number];
-}) {
-	const gltf = useGLTF("/pengwu/pengwu.gltf");
-
-	return (
-		<group position={position}>
-			<MouseRotatingObject
-				baseRotation={[
-					(20 * Math.PI) / 180,
-					(-45 * Math.PI) / 180,
-					(10 * Math.PI) / 180,
-				]}
-			>
-				<primitive object={gltf.scene} scale={0.7} />
-			</MouseRotatingObject>
-		</group>
-	);
-}
-
-function IceBerg({
-	baseRotation = [0, 0, 0],
-}: {
-	baseRotation?: [number, number, number];
-}) {
-	const ref = useRef<THREE.Group>(null);
-	const gltf = useGLTF("/iceberg/iceberg.gltf");
-
-	useFrame(() => {
-		if (ref.current) {
-			ref.current.rotation.x = baseRotation[0];
-			ref.current.rotation.y = baseRotation[1];
-			ref.current.rotation.z = baseRotation[2];
-		}
-	});
-
-	return (
-		<group ref={ref}>
-			<primitive object={gltf.scene} scale={0.2} />
-		</group>
 	);
 }
