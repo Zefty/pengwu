@@ -6,19 +6,11 @@ import viteTsConfigPaths from "vite-tsconfig-paths";
 import tailwindcss from "@tailwindcss/vite";
 import { nitro } from "nitro/vite";
 
-const isProd = process.env.NODE_ENV === "production";
-
 const config = defineConfig({
   plugins: [
     devtools(),
     nitro({
-      externals: {
-        inline: [
-          "@react-three/drei", 
-          "@react-three/fiber", 
-          "@tabler/icons-react"
-        ]
-      }
+      traceDeps: ["pg"]
     }),
     viteTsConfigPaths({
       projects: ["./tsconfig.json"],
@@ -37,17 +29,6 @@ const config = defineConfig({
       },
     }),
   ],
-  ...(isProd
-    ? {
-        ssr: {
-          noExternal: [
-            "@react-three/fiber",
-            "@react-three/drei",
-            "@tabler/icons-react",
-          ],
-        },
-      }
-    : {}),
 });
 
 export default config;
