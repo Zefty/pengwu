@@ -6,8 +6,6 @@ import viteTsConfigPaths from "vite-tsconfig-paths";
 import tailwindcss from "@tailwindcss/vite";
 import { nitro } from "nitro/vite";
 
-const isProd = process.env.NODE_ENV === "production";
-
 const config = defineConfig({
   plugins: [
     devtools(),
