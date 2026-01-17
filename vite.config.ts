@@ -9,9 +9,7 @@ import { nitro } from "nitro/vite";
 const config = defineConfig({
   plugins: [
     devtools(),
-    nitro({
-      traceDeps: ["pg"]
-    }),
+    nitro(),
     viteTsConfigPaths({
       projects: ["./tsconfig.json"],
     }),
